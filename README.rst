@@ -1,6 +1,6 @@
 pySplash
 ========
-**ver. 0.1**
+**ver. 0.1.1**
 
 .. image:: https://raw.githubusercontent.com/Egregors/pySplash/master/img/icon.png
 

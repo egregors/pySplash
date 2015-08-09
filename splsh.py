@@ -2,7 +2,7 @@
 """
     pySplash – Wallpaper for your Mac
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ver: 0.1
+    ver: 0.1.1
     url: http://egregors.com/lab/pySplash
     source: https://github.com/Egregors/pySplash
 
@@ -45,13 +45,19 @@ class SplshApp(rumps.App):
         self.menu = [
             'x'.join([str(self.screen_width), str(self.screen_height)]),
             None,
-            rumps.MenuItem('Next'),
-            rumps.MenuItem('Clear Cache'),
+            rumps.MenuItem('Next', key='n'),
+            None,
+            rumps.MenuItem('Gray Mood'),
+            rumps.MenuItem('Blur'),
+            rumps.MenuItem('Clear Cache', key='c'),
             None,
         ]
 
         # Path to directory for downloaded images
         self.media_dir = 'media/'
+        # Extra url parameters
+        self.gray_mood = False
+        self.blur = False
 
         print('Current resolution: {} x {}'.format(self.screen_width, self.screen_height))
 
@@ -62,7 +68,18 @@ class SplshApp(rumps.App):
             print('Creating MEDIA_DIR...')
             os.makedirs(self.media_dir)
 
-        url = 'https://unsplash.it/{w}/{h}/?random'.format(w=self.screen_width, h=self.screen_height)
+        url = 'https://unsplash.it/'
+
+        if self.gray_mood:
+            url += 'g/'
+
+        url += '{w}/{h}/?random'
+
+        if self.blur:
+            url += '&blur'
+
+        url = url.format(w=self.screen_width, h=self.screen_height)
+
         file_name = self.media_dir + datetime.datetime.now().strftime("%H:%M:%S.%f") + '.jpg'
 
         try:
@@ -83,6 +100,16 @@ class SplshApp(rumps.App):
             print('Service unavailable, check your internet connection.')
             rumps.alert(title='Connection Error', message='Service unavailable\n'
                                                           'Please, check your internet connection')
+
+    @rumps.clicked('Gray Mood')
+    def is_gray_mood(self, sender):
+        self.gray_mood = not self.gray_mood
+        sender.state = not sender.state
+
+    @rumps.clicked('Blur')
+    def is_blur(self, sender):
+        self.blur = not self.blur
+        sender.state = not sender.state
 
     @rumps.clicked('Clear Cache')
     def clear_cache(self, _):
