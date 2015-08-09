@@ -2,13 +2,22 @@ pySplash
 ========
 **ver. 0.1.1**
 
-.. image:: https://raw.githubusercontent.com/Egregors/pySplash/master/img/icon.png
+.. image:: https://raw.githubusercontent.com/Egregors/pySplash/master/img/splsh_02.png
+    :scale: 50%
 
 Unbelievable simple app to set the random desktop picture from https://unsplash.com
 
 Download_
 
 .. _Download: https://github.com/Egregors/pySplash/releases/download/0.1.1/splsh.zip
+
+
+Options
+~~~~~~~
+.. image:: https://raw.githubusercontent.com/Egregors/pySplash/master/img/splsh_01.png
+
+* Gray Mood – some gray, sad pictures :(
+* Blur – the same images but blur
 
 Required
 --------
