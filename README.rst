@@ -9,7 +9,7 @@ Unbelievable simple app to set the random desktop picture from https://unsplash.
 
 Download_
 
-.. _Download: https://github.com/Egregors/pySplash/releases/download/0.1.1/splsh.zip
+.. _Download: https://github.com/Egregors/pySplash/releases/download/0.1.2/splsh.zip
 
 
 Options
