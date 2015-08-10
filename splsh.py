@@ -14,7 +14,7 @@
     Required:
     - PyObjC
     - Python 2.6+
-    - rumps
+    - rumps (see: https://github.com/jaredks/rumps)
 
     To build mac bundle use:
     ```python setup.py py2app```
@@ -53,33 +53,24 @@ class SplshApp(rumps.App):
             None,
         ]
 
-        # Path to directory for downloaded images
+        # Path to dir for downloaded images
         self.media_dir = 'media/'
         # Extra url parameters
         self.gray_mood = False
         self.blur = False
 
-        print('Current resolution: {} x {}'.format(self.screen_width, self.screen_height))
-
     @rumps.clicked('Next')
     def next_image(self, _):
 
         if not os.path.exists(self.media_dir):
-            print('Creating MEDIA_DIR...')
             os.makedirs(self.media_dir)
 
         url = 'https://unsplash.it/'
-
-        if self.gray_mood:
-            url += 'g/'
-
+        if self.gray_mood: url += 'g/'
         url += '{w}/{h}/?random'
-
-        if self.blur:
-            url += '&blur'
+        if self.blur: url += '&blur'
 
         url = url.format(w=self.screen_width, h=self.screen_height)
-
         file_name = self.media_dir + datetime.datetime.now().strftime("%H:%M:%S.%f") + '.jpg'
 
         try:
@@ -103,19 +94,15 @@ class SplshApp(rumps.App):
 
     @rumps.clicked('Gray Mood')
     def is_gray_mood(self, sender):
-        self.gray_mood = not self.gray_mood
-        sender.state = not sender.state
+        self.gray_mood, sender.state = not self.gray_mood, not sender.state
 
     @rumps.clicked('Blur')
     def is_blur(self, sender):
-        self.blur = not self.blur
-        sender.state = not sender.state
+        self.blur, sender.state = not self.blur, not sender.state
 
     @rumps.clicked('Clear Cache')
     def clear_cache(self, _):
-        """ Remove directory with all downloaded images.
-        :param _:
-        :return:
+        """ Remove dir with all downloaded images.
         """
         if os.path.exists(self.media_dir):
             print('Removing MEDIA_DIR...')
